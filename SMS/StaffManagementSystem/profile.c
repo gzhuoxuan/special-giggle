@@ -23,15 +23,14 @@ void deleteID(int id);
 int MenuList();
 
 
-int Get_id()//AI
+int Get_id()
 {
 	FILE* fp = NULL;
-	Staff temp;//temporarily store the info in temp
+	Staff temp;
 	int id = 1;
 
 	if (fopen_s(&fp, "staff.dat", "rb") != 0 || fp == NULL)
-		return 1;   // file not exist then create first record
-
+		return 1;  
 	while (fread(&temp, sizeof(Staff), 1, fp) == 1)
 		id++;
 
@@ -67,7 +66,7 @@ Staff Data_input()
 	int input1;
 	printf("\n\n\t1. Save\n\n\t2. Back to Menu\n\n\t");
 	scanf_s("%d", &input1);
-	if (input1 == 1)//cannot use while bro
+	if (input1 == 1)
 		saveStaff(staff);
 	if (input1 == 2)
 		MenuList();
@@ -77,18 +76,18 @@ Staff Data_input()
 
 int saveStaff(Staff staff)
 {
-	FILE* fp = NULL;//AI, file pointer
+	FILE* fp = NULL;
 	errno_t err = fopen_s(&fp, "staff.dat", "ab");//append binary not wb cuz wb rewrite and clean the file
 	int id;
 
-	if (err != 0 || fp == NULL) //AI
+	if (err != 0 || fp == NULL) 
 	{
 		printf("file open failed\n");
 		return 0;
 	}	
 	
-	fwrite(&staff, sizeof(Staff), 1, fp);//AI, write in
-	fclose(fp);//AI close the file
+	fwrite(&staff, sizeof(Staff), 1, fp);
+	fclose(fp);
 
 	int i;
 	printf("\tSuccessfully saved! Go back to the menu?\n\n\t1. Yes\t2. No\t3. Keep recording\n\n\t");
@@ -107,7 +106,7 @@ int saveStaff(Staff staff)
 	}
 }
 
-void showAllStaff(void)//AI
+void showAllStaff(void)
 {
 	FILE* fp = NULL;
 	Staff staff;
@@ -307,3 +306,4 @@ int main(void)
 	return 0;
 
 } 
+
